@@ -1,5 +1,6 @@
 const express = require('express');
 const sqlite3 = require('sqlite3');
+const menuItemsRouter = require('./menuitems');
 
 const menusRouter = express.Router();
 const db = new sqlite3.Database(process.env.TEST_DATABASE || './database.sqlite');
@@ -90,5 +91,7 @@ menusRouter.delete('/:menuId', (req, res, next) => {
         }
     });
 });
+
+menusRouter.use('/:menuId/menu-items', menuItemsRouter);
 
 module.exports = menusRouter;
